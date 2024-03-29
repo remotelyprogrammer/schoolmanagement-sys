@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models import Max, Q
 
-class PersonalInfo(models.Model):
+
+class Student(models.Model):
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     suffix = models.CharField(max_length=10, blank=True)
-    date_of_birth = models.DateField()
+    birth_date = models.DateField()
     country_of_birth = models.CharField(max_length=100)
     birth_place = models.CharField(max_length=100)
     nationality = models.CharField(max_length=100)
-
 
     CIVIL_STATUS_CHOICES = [
         ('single', 'Single'),
@@ -18,9 +20,7 @@ class PersonalInfo(models.Model):
         ('divorced', 'Divorced'),
         ('separated', 'Separated'),
     ]
-
     civil_status = models.CharField(max_length=20, choices=CIVIL_STATUS_CHOICES, blank=True)
-
 
     SEX_CHOICES = [
         ('male', 'Male'),
@@ -44,19 +44,23 @@ class PersonalInfo(models.Model):
 
 
 class Address(models.Model):
-    personal_info = models.OneToOneField(PersonalInfo, on_delete=models.CASCADE)
+    student = models.OneToOneField(Student, on_delete=models.CASCADE)
     province = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     house_number = models.CharField(max_length=20)
     barangay = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=10)
 
+    class Meta:
+        verbose_name_plural = "addresses"
+
+
     def __str__(self):
         return f"{self.house_number} {self.barangay}, {self.city}, {self.province}"
 
 
 class Contact(models.Model):
-    personal_info = models.ForeignKey(PersonalInfo, on_delete=models.CASCADE, related_name='contacts')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='contacts')
     full_name = models.CharField(max_length=100)
     relationship = models.CharField(max_length=20)
     mobile_number = models.CharField(max_length=20, blank=True)
