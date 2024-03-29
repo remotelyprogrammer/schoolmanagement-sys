@@ -1,0 +1,19 @@
+
+  <h1>Student Details</h1>
+  
+  <p>Name: {{ student.first_name }}</p>
+  <!-- Include other student details here -->
+
+  <h2>Addresses</h2>
+  {{ address.province }}
+  {{ address.house_number }}
+
+  {{ address.as_p}}
+  
+
+  <h2>Contacts</h2>
+  {% for contact in contacts %}
+    <p>{{ contact.full_name }} - {{ contact.relationship }}: {{ contact.mobile_number }}</p>
+  {% empty %}
+    <p>No contacts on file.</p>
+  {% endfor %}

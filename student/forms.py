@@ -28,3 +28,35 @@ AddressFormSet = inlineformset_factory(
     Student, Address, form=AddressForm,
     fields=['province', 'city', 'house_number', 'barangay', 'postal_code'], extra=1, can_delete=False
 )
+
+class StudentDetailForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super(StudentDetailForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['disabled'] = True
+
+
+class AddressDetailForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super(AddressDetailForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['disabled'] = True
+
+
+class ContactDetailForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super(ContactDetailForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['disabled'] = True
