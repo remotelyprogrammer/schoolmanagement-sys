@@ -44,4 +44,4 @@ class Section(models.Model):
     grade_level = models.ForeignKey(GradeLevel, related_name='section', on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name
+        return f"{self.grade_level} - {self.name}" 

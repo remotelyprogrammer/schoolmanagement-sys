@@ -3,7 +3,7 @@
 *.pot
 *.pyc
 __pycache__
-db.sqlite3
+*db.sqlite3
 db.sqlite3
 *.sqlite3
 
@@ -145,3 +145,24 @@ smis/__pycache__/settings.cpython-312.pyc
 smis/__pycache__/urls.cpython-312.pyc
 student/__pycache__/forms.cpython-312.pyc
 student/__pycache__/models.cpython-312.pyc
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+media
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
