@@ -45,3 +45,7 @@ class Section(models.Model):
 
     def __str__(self):
         return f"{self.grade_level} - {self.name}" 
+
+
+class Curriculum(models.Model):
+    name = models.CharField(max_length=100, help_text="Name of the Curriculum")
