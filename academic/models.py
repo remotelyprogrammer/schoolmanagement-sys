@@ -50,5 +50,9 @@ class Section(models.Model):
 class Curriculum(models.Model):
     name = models.CharField(max_length=100, help_text="Name of the Curriculum")
 
+
+    class Meta:
+        verbose_name_plural = "curricula"
+
     def __str__(self):
         return f"{self.name}" 
