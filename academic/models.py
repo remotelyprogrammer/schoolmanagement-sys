@@ -49,10 +49,19 @@ class Section(models.Model):
 
 class Curriculum(models.Model):
     name = models.CharField(max_length=100, help_text="Name of the Curriculum")
+    grade_level = models.OneToOneField(GradeLevel, related_name='curriculum', on_delete=models.CASCADE)
+
+
 
 
     class Meta:
         verbose_name_plural = "curricula"
 
     def __str__(self):
-        return f"{self.name}" 
+        return f"Curriculum for {self.grade_level.name}"
+
+
+class CurriculumSubject(models.Model):
+    curriculum = models.ForeignKey(Curriculum, related_name='subjects', on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    # Additional fields such as weekly hours, term, etc. can be added here.
