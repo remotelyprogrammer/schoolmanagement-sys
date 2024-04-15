@@ -65,3 +65,58 @@ class CurriculumSubject(models.Model):
     curriculum = models.ForeignKey(Curriculum, related_name='subjects', on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     # Additional fields such as weekly hours, term, etc. can be added here.
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=100, help_text="Name of the Department")
+
+    def __str__(self):
+        return f"{self.name}" 
+
+
+class Shift(models.Model):
+    name = models.CharField(max_length=100, help_text="Name of the Shift")
+
+    def __str__(self):
+        return f"{self.name}" 
+
+
+class Instructor(models.Model): #Temporary
+    first_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.last_name}, {self.first_name} {self.middle_name}"
+
+class SchoolClass(models.Model):
+    name = models.CharField(max_length=100)
+    subject = models.ForeignKey(Subject, related_name='subject', on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, related_name='schoolclass', on_delete=models.PROTECT)
+    instructor = models.ForeignKey(Instructor, related_name='instructor', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "schoolclasses"
+
+    def __str__(self):
+        return f"{self.name} - {self.subject} - {self.instructor}"
+
+
+# class ClassStudent(models.Model):
+#     Enrollment = get_model('enrollment', 'Enrollment')
+#     enrollee = models.ForeignKey(Enrollment,related_name='enrollee', on_delete=models.CASCADE)
+#     schoolclass = models.ForeignKey(SchoolClass,related_name='schoolclass', on_delete=models.CASCADE)
+
+
+#     def __str__(self):
+#         return f"{self.enrolle} - {self.schoolclass}"
+
+
+# This string reference will prevent circular imports.
+class ClassStudent(models.Model):
+    enrollee = models.ForeignKey('enrollment.Enrollment', related_name='class_students', on_delete=models.CASCADE)
+    schoolclass = models.ForeignKey('academic.SchoolClass', related_name='students', on_delete=models.CASCADE)
+
+    def __str__(self):
+        # Make sure to return string representations of the fields, not the fields themselves.
+        return f"{self.enrollee} - {self.schoolclass}"

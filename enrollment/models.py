@@ -3,7 +3,6 @@ from student.models import Student
 from django.utils import timezone
 from django.db.models import Max
 from academic.models import SchoolYear, GradeLevel
-from academic.models import Section, GradeLevel, SchoolYear
 
 
 class Enrollment(models.Model):

@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView
-from .models import GradeLevel, SchoolYear, Subject, Section, Curriculum
-from .forms import SchoolYearForm, GradeLevelForm, SubjectForm, SectionForm, CurriculumForm
+from .models import GradeLevel, SchoolYear, Subject, Section, Curriculum, Shift, Department
+from .forms import SchoolYearForm, GradeLevelForm, SubjectForm, SectionForm, CurriculumForm, DepartmentForm, ShiftForm
 from django.urls import reverse_lazy
 
 
@@ -42,4 +42,18 @@ class CurriculumCreateView(CreateView):
 	model = Curriculum
 	template_name = 'academic/curriculum-create.html'
 	form_class = CurriculumForm
+	success_url = reverse_lazy('academic:index')
+
+
+class DepartmentCreateView(CreateView):
+	model = Department
+	template_name = 'academic/department-create.html'
+	form_class = DepartmentForm
+	success_url = reverse_lazy('academic:index')
+
+
+class ShiftCreateView(CreateView):
+	model = Shift
+	template_name = 'academic/shift-create.html'
+	form_class = ShiftForm
 	success_url = reverse_lazy('academic:index')

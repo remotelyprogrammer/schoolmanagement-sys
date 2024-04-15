@@ -1,5 +1,5 @@
 from django import forms
-from .models import SchoolYear, GradeLevel, Subject, Section, Curriculum
+from .models import SchoolYear, GradeLevel, Subject, Section, Curriculum, Department, Shift
 
 
 class SchoolYearForm(forms.ModelForm):
@@ -30,4 +30,15 @@ class CurriculumForm(forms.ModelForm):
     class Meta:
         model = Curriculum
         fields = ('__all__')
-        
+
+
+class ShiftForm(forms.ModelForm):
+    class Meta:
+        model = Shift
+        fields = ('__all__')
+
+
+class DepartmentForm(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = ('__all__')

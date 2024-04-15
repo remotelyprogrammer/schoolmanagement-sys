@@ -10,4 +10,6 @@ urlpatterns = [
     path("subject-create", views.SubjectCreateView.as_view(), name="subject-create"),
     path("section-create", views.SectionCreateView.as_view(), name="section-create"),
     path("curriculum-create", views.CurriculumCreateView.as_view(), name="curriculum-create"),
+    path("department-create", views.DepartmentCreateView.as_view(), name="department-create"),
+    path("shift-create", views.ShiftCreateView.as_view(), name="shift-create"),
 ]
